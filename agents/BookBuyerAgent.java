@@ -24,25 +24,10 @@ public class BookBuyerAgent extends Agent {
     protected void setup() {
         bbGui = new BookBuyerGui(this);     
         bbGui.showGui();
-        
-        
-        
+                        
         System.out.println("Buyer agent " + getAID().getName() + " is ready");
         
-        confirm = false;
-        //Object[] args = getArguments();
-        //if(args != null && args.length > 0) {
-          //bookTitle = (String)args[0];
-          //System.out.println("Book: " + bookTitle);
-
-        //addBehaviour(new TickerBehaviour(this, ticker_timer) {
-        //    protected void onTick() {     
-        
-        
-        //} else {
-          //System.out.println("No target book title specified");
-          //doDelete();
-        //}
+        confirm = false;        
     }        
   
     @Override
@@ -88,12 +73,16 @@ public class BookBuyerAgent extends Agent {
     }
     
     /**
-     * turns down a buyer
+     * turns down a buyer, declines the transaction
      */
     public void turnDown(){        
         bbGui.showConfirmationDialog();
     }
     
+    /**
+     * makes offer to wait for confirmation response from buyer
+     * @param bestOffer 
+     */
     public void makeOffer(String bestOffer){
         bbGui.showConfirmationDialog(bestOffer);
     }

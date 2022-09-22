@@ -30,15 +30,15 @@ public class BookSellerGui extends JFrame {
 		
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(2, 2));
-		p.add(new JLabel("Book title:"));
+		p.add(new JLabel("Titulo del libro:"));
 		titleField = new JTextField(15);
 		p.add(titleField);
-		p.add(new JLabel("Price:"));
+		p.add(new JLabel("Precio:"));
 		priceField = new JTextField(15);
 		p.add(priceField);
 		getContentPane().add(p, BorderLayout.CENTER);
 		
-		JButton addButton = new JButton("Add");
+		JButton addButton = new JButton("Agregar");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				try {
@@ -49,7 +49,7 @@ public class BookSellerGui extends JFrame {
 					titleField.setText("");
 					priceField.setText("");
 				}catch(Exception e) {
-					JOptionPane.showMessageDialog(BookSellerGui.this, "Invalid values","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(BookSellerGui.this, "Valores inválidos","Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

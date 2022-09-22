@@ -35,6 +35,9 @@ public class BookBuyerGui extends javax.swing.JFrame {
         this.setVisible(false);
     }
     
+    /**
+     * This is in case of a invalid purchase    
+     */
     public void showConfirmationDialog(){
         //cpGui.showGui(); 
         lTrying.setVisible(false);
@@ -46,13 +49,16 @@ public class BookBuyerGui extends javax.swing.JFrame {
         
     }
     
-    public void showConfirmationDialog(String bestOffer){
-        //cpGui.showGui(bestOffer);  
+    /**
+     * To confirm with buyer the purchase
+     * @param bestOffer 
+     */
+    public void showConfirmationDialog(String bestOffer){        
         lTrying.setVisible(false);
         
         int reply = JOptionPane.showConfirmDialog(null
-                , "Best Seller: " + bestOffer
-                , "Confirmar", JOptionPane.YES_NO_OPTION);
+                , "Mejor vendedor: " + bestOffer
+                , myAgent.getBookTitle(), JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {           
             myAgent.confirm();
             //JOptionPane.showMessageDialog(null, "Libro comprado");
@@ -152,7 +158,7 @@ public class BookBuyerGui extends javax.swing.JFrame {
                 lTrying.setVisible(true);         
                 myAgent.buyBook(bookTitle);
         }catch(Exception e) {
-                JOptionPane.showMessageDialog(this, "Invalid values","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Valores invalidos","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

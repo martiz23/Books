@@ -78,8 +78,7 @@ public class RequestPerformer extends Behaviour{
                 order.setContent(bookTitle);
                 order.setConversationId("book-trade");
                 order.setReplyWith("order" + System.currentTimeMillis());
-                bbAgent.send(order);
-                //System.out.println("ORDER: "+ order);
+                bbAgent.send(order);                
 
                 mt = MessageTemplate.and(MessageTemplate.MatchConversationId("book-trade"),
                     MessageTemplate.MatchInReplyTo(order.getReplyWith()));
