@@ -20,16 +20,7 @@ public class RequestPerformer extends Behaviour{
       bookTitle = a.getBookTitle();
     }
   
-    public void action() {        
-        //if(bbAgent.isCancel()){
-            /*
-            step = 0;
-            bbAgent.restart();
-            System.out.println("BuyerAgent Restarted");
-            block();*/            
-            //step = 5;
-            //done();
-        //}
+    public void action() {             
         switch(step) {
         case 0:
             if(bookTitle != null){
@@ -65,27 +56,18 @@ public class RequestPerformer extends Behaviour{
                 repliesCount++;
                 
                 if(repliesCount >= bbAgent.getSellerAgents().length) {       
-                    if(bestSeller == null){                                       
-                        //bbAgent.setBestOffer("Not offers at the moment.");                        
-                        bbAgent.turnDown();       
-                        //block();
-                        //step = 4;
-                        //done();
-                        
-                    }else
-                        //bbAgent.setBestOffer(bestSeller.getName()+": " + bestPrice + "$");            
+                    if(bestSeller == null){                                                                                   
+                        bbAgent.turnDown();                                                      
+                    }else                             
                         bbAgent.makeOffer(bestSeller.getName()+": " + bestPrice + "$");
                     step = 2;                    
                 }
             } else {                      
-                if(bbAgent.getSellerAgents().length == 0){
-                    //bbAgent.setBestOffer("Not sellers at the moment.");
-                    //bbAgent.turnDown();       
-                    bbAgent.turnDown();       
-                    //block();
+                if(bbAgent.getSellerAgents().length == 0){                     
+                    bbAgent.turnDown();                        
                 }
                 block();                
-                //step = 4;
+          
             }
         break;
 
@@ -103,8 +85,6 @@ public class RequestPerformer extends Behaviour{
                     MessageTemplate.MatchInReplyTo(order.getReplyWith()));
 
                 step = 3;
-            }else{
-                //block();
             }
         break;
 
@@ -112,18 +92,12 @@ public class RequestPerformer extends Behaviour{
             reply = myAgent.receive(mt);
             if (reply != null) {
                 if (reply.getPerformative() == ACLMessage.INFORM) {
-                   System.out.println(bookTitle+" successfully purchased from agent "+reply.getSender().getName());
-                   System.out.println("Price = "+bestPrice);
-                   //myAgent.doDelete();
+                   System.out.println(bookTitle+" successfully purchased from agent "+reply.getSender().getName());            
                 }
                 else {
                    System.out.println("Attempt failed: requested book already sold.");
                 }
-
-                //bbAgent.setConfirm(false);
-
-                //step = 0;
-                //bbAgent.restart();
+        
                 step = 5;              
             }
             else {
@@ -138,15 +112,10 @@ public class RequestPerformer extends Behaviour{
     }
   
     @Override
-    public boolean done() {
-        /*
-        if (step == 4) {
-            System.out.println("Attempt failed: "+bookTitle+" not available for sale");           
-            //bbAgent.turnDown();                        
-        }*/
+    public boolean done() {       
         if(step == 5 && bbAgent.isConfirm() || bbAgent.isCancel()){
             bbAgent.restart();
-            System.out.println("Is done");    
+            System.out.println("Operation completed. \n");    
             return true;
         }
         return false;

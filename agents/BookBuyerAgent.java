@@ -13,7 +13,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 public class BookBuyerAgent extends Agent {
     private String bookTitle;
     private AID[] sellerAgents;
-    private int ticker_timer = 2000;
+    //private int ticker_timer = 2000;
     private BookBuyerAgent this_agent = this;
     
     private boolean confirm;
@@ -80,12 +80,7 @@ public class BookBuyerAgent extends Agent {
                         fe.printStackTrace();
                     }
 
-                    myAgent.addBehaviour(new RequestPerformer(this_agent));
-                    /*
-                    if(bestOffer != null){
-                        //cpGui.showGui(bestOffer);    
-                        bbGui.showConfirmationDialog(bestOffer);
-                    }*/
+                    myAgent.addBehaviour(new RequestPerformer(this_agent));                  
                 }
                 
             }

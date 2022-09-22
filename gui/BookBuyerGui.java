@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class BookBuyerGui extends javax.swing.JFrame {
     private BookBuyerAgent myAgent;
-    private ConfirmPurchase cpGui;
+    //private ConfirmPurchase cpGui;
     /**
      * Creates new form BookBuyerGui
      */
@@ -22,7 +22,7 @@ public class BookBuyerGui extends javax.swing.JFrame {
         initComponents();
         this.setTitle(a.getLocalName());    
         lTrying.setVisible(false);
-        cpGui = new ConfirmPurchase(a);  
+        //cpGui = new ConfirmPurchase(a);  
         
         myAgent = a;                
     }
@@ -36,14 +36,30 @@ public class BookBuyerGui extends javax.swing.JFrame {
     }
     
     public void showConfirmationDialog(){
-        cpGui.showGui(); 
+        //cpGui.showGui(); 
         lTrying.setVisible(false);
-        System.out.println("Attempt failed: "+myAgent.getBookTitle()+" not available for sale");   
+                        
+        JOptionPane.showMessageDialog(null
+                , "Intento fallido: "+myAgent.getBookTitle()+" no dispobible para la venta." 
+                ,"Ok",1);                    
+        myAgent.cancel();               
+        
     }
     
     public void showConfirmationDialog(String bestOffer){
-        cpGui.showGui(bestOffer);  
+        //cpGui.showGui(bestOffer);  
         lTrying.setVisible(false);
+        
+        int reply = JOptionPane.showConfirmDialog(null
+                , "Best Seller: " + bestOffer
+                , "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {           
+            myAgent.confirm();
+            //JOptionPane.showMessageDialog(null, "Libro comprado");
+            JOptionPane.showMessageDialog(null,"Libro comprado","Operación exitosa",1);
+        }else{
+            myAgent.cancel();
+        }
     }
 
     /**
